@@ -9,7 +9,7 @@ import java.util.Set;
 @Table(name = "tb_product")
 public class Product {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
@@ -20,7 +20,6 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
-	public Object repository;
 
     public Product() {
     }

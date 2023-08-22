@@ -8,6 +8,7 @@ import com.devsuperior.aula.dto.CategoryDTO;
 import com.devsuperior.aula.dto.ProductDTO;
 import com.devsuperior.aula.entities.Category;
 import com.devsuperior.aula.entities.Product;
+import com.devsuperior.aula.repositories.CategoryRepository;
 import com.devsuperior.aula.repositories.ProductRepository;
 
 
@@ -16,6 +17,8 @@ public class ProductService {
 	@Autowired
 	private ProductRepository repository;
 	
+	@Autowired
+	private CategoryRepository categoryRepository;
 	public ProductService() {
 		
 	}
@@ -28,8 +31,10 @@ public class ProductService {
 		entity.setPrice(dto.getPrice());
 		
 		for(CategoryDTO catdto: dto.getCategories()) {
-			Category cat = new Category();
-			cat.setId(catdto.getId());
+			
+			Category cat = categoryRepository.getReferenceById(catdto.getId());
+			//Category cat = new Category();
+			//cat.setId(catdto.getId());
 			entity.getCategories().add(cat);
 		}
 		entity = repository.save(entity);
